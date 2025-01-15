@@ -1,0 +1,17 @@
+{
+    "name": "ilhann/pteromanagerpro",
+    "autoload": {
+        "psr-4": {
+            "Ilhann\\Pteromanagerpro\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Muzan",
+            "email": "46395979+Muzannnn@users.noreply.github.com"
+        }
+    ],
+    "require": {
+        "polarising/bcrypt": "^1.0"
+    }
+}

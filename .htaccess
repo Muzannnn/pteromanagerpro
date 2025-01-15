@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteRule ^anime/([0-9]+)$ anime.php?id=$1 [NC,L]
+RewriteRule ^anime/([^/]+)/?$ anime.php?name=$1 [NC,L]
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [NC,L]
+
+ErrorDocument 404 /404
