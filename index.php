@@ -25,14 +25,20 @@ $page = trim($requestUri, '/');
 
 $theme = GetConfig::GetConfigVar("theme")['content'];
 
-$templatePath = "$theme/$page.twig";
+$templatePath = "$theme/views/$page.twig";
 
-
+if (!file_exists("themes/$templatePath")) {
+  http_response_code(404);
+  echo $twig->render('partials/404.twig');
+  exit;
+}
 
 $data = [
   'theme' => $theme,
   'project_name' => GetConfig::GetConfigVar("project_name")['content'],
-  'current_year' => date('Y'),
+  'description' => GetConfig::GetConfigVar("description")['content'],
+  'favicon' => GetConfig::GetConfigVar("favicon")['content'],
+  'icon' => GetConfig::GetConfigVar("icon")['content'],
 ];
 
 echo $twig->render($templatePath, $data);

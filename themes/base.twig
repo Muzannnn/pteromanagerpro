@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ project_name }} - Accueil</title>
+    <link rel="shortcut icon" href="{{ favicon }}" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ favicon }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ favicon }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ favicon }}">
+    {% include theme ~ '/components/head.twig' %}
+</head>
+<body>
+    <main class="main" id="top">
+        {% include theme ~ '/components/navbar.twig' %}
+        {% block content %}{% endblock %}
+        {% include theme ~ '/components/footer.twig' %}
+    </main>
+
+    {% include theme ~ '/components/before-end-body.twig' %}
+</body>
+</html>
