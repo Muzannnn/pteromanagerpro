@@ -15,6 +15,7 @@ include 'Database.php';
 
 $GLOBALS['DB'] = new Database($GLOBALS['mysql_host'], $GLOBALS['mysql_database'], $GLOBALS['mysql_username'], $GLOBALS['mysql_password']);
 
+include 'GetConfig.php';
 include 'Account.php';
 include 'Security.php';
 include 'CSRF.php';

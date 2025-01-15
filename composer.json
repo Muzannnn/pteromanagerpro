@@ -12,6 +12,7 @@
         }
     ],
     "require": {
-        "polarising/bcrypt": "^1.0"
+        "polarising/bcrypt": "^1.0",
+        "twig/twig": "^3.18"
     }
 }

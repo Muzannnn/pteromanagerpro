@@ -105,6 +105,7 @@ class Database
 		return $req->fetchAll();
 	}
 
+
 	public function Update($table_name, $where_check, $data, $filter_enable = true)
 	{
 		try {
