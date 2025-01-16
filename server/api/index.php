@@ -21,7 +21,7 @@ if (isset($headers['Authorization'])) {
                 $year = $_POST['year'];
                 $vertical_image = $_POST['vertical_image'];
                 $horizontal_image = $_POST['horizontal_image'];
-                Animes::AddAnime($name, $id_name, $id_imdb, $genres, $plot, $synopsis, $year, $vertical_image, $horizontal_image);
+                //Animes::AddAnime($name, $id_name, $id_imdb, $genres, $plot, $synopsis, $year, $vertical_image, $horizontal_image);
             }
 
             if(isset($_GET['add_episode'])){

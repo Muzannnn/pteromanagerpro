@@ -1,0 +1,8 @@
+{
+    "login": {
+        "permission_level": 1
+    },
+    "register": {
+        "permission_level": 1
+    }
+}

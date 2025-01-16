@@ -1,36 +1,61 @@
 <?php 
 require 'vendor/autoload.php';
 
-include ("server/api/class/include.php");
+include("server/api/class/include.php");
 
 $loader = new \Twig\Loader\FilesystemLoader('themes');
-
 $twig = new \Twig\Environment($loader, [
   'cache' => false,
-  'debug' => true
+  'debug' => true,
 ]);
 
 $twig->addExtension(new \Twig\Extension\DebugExtension());
 
-$requestUri = $_SERVER['REQUEST_URI']; 
-
+$requestUri = $_SERVER['REQUEST_URI'];
 $requestUri = explode('?', $requestUri)[0];
+$requestUri = trim($requestUri, '/');
 
-if ($requestUri === '/' || $requestUri === '') {
+if ($requestUri === '' || $requestUri === '/') {
     header('Location: /home');
     exit;
 }
 
-$page = trim($requestUri, '/'); 
-
 $theme = GetConfig::GetConfigVar("theme")['content'];
 
-$templatePath = "$theme/views/$page.twig";
+$phpPagesFile = __DIR__ . '/php_views/routes.json';
+$phpPages = [];
+if (file_exists($phpPagesFile)) {
+    $phpPages = json_decode(file_get_contents($phpPagesFile), true);
+}
+
+$userPermissionLevel = 1; // Exemple : 1 = Visiteur, 2 = Utilisateur connecté, 3 = Admin
+
+
+if (array_key_exists($requestUri, $phpPages)) {
+  $requiredPermissionLevel = $phpPages[$requestUri]['permission_level'];
+  if ($userPermissionLevel >= $requiredPermissionLevel) {
+      $phpFile = __DIR__ . "/php_views/$requestUri.php";
+      if (file_exists($phpFile)) {
+          include $phpFile; // Inclure le fichier PHP si existant
+          exit;
+      } else {
+          http_response_code(404);
+          echo "Erreur 404 : Fichier PHP introuvable.";
+          exit;
+      }
+  } else {
+      http_response_code(403);
+      echo "Erreur 403 : Vous n'avez pas les permissions nécessaires pour accéder à cette page.";
+      exit;
+  }
+}
+
+$templatePath = "$theme/views/$requestUri.twig";
 
 if (!file_exists("themes/$templatePath")) {
-  http_response_code(404);
-  echo $twig->render('partials/404.twig');
-  exit;
+    http_response_code(404);
+    echo $twig->render('partials/404.twig');
+    exit;
 }
 
 $data = [
@@ -39,6 +64,8 @@ $data = [
   'description' => GetConfig::GetConfigVar("description")['content'],
   'favicon' => GetConfig::GetConfigVar("favicon")['content'],
   'icon' => GetConfig::GetConfigVar("icon")['content'],
+  'brand_logo' => GetConfig::GetConfigVar("brand_logo")['content'],
+  'slogan' => GetConfig::GetConfigVar("slogan")['content'],
 ];
 
 echo $twig->render($templatePath, $data);
