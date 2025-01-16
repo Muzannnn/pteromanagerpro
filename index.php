@@ -28,7 +28,7 @@ if (file_exists($phpPagesFile)) {
     $phpPages = json_decode(file_get_contents($phpPagesFile), true);
 }
 
-$userPermissionLevel = 1; // Exemple : 1 = Visiteur, 2 = Utilisateur connecté, 3 = Admin
+$userPermissionLevel = 1;
 
 
 if (array_key_exists($requestUri, $phpPages)) {
@@ -36,7 +36,7 @@ if (array_key_exists($requestUri, $phpPages)) {
   if ($userPermissionLevel >= $requiredPermissionLevel) {
       $phpFile = __DIR__ . "/php_views/$requestUri.php";
       if (file_exists($phpFile)) {
-          include $phpFile; // Inclure le fichier PHP si existant
+          include $phpFile;
           exit;
       } else {
           http_response_code(404);

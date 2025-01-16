@@ -18,17 +18,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="<?= GetConfig::GetConfigVar("favicon")['content'] ?>">
-  <link rel="icon" type="image/png" href="<?= GetConfig::GetConfigVar("favicon")['content'] ?>">
-  <title><?= GetConfig::GetConfigVar("project_name")['content'] ?> - Se connecter</title>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-
-  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-svg.css" rel="stylesheet" />
-
-  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-
-  <link id="pagestyle" href="../public/assets/css/argon-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <?php include("components/head.php") ?>
 </head>
 
 <body class="">
@@ -85,12 +75,7 @@
     </section>
   </main>
   <!--   Core JS Files   -->
-  <script src="../public/assets/js/core/popper.min.js"></script>
-  <script src="../public/assets/js/core/bootstrap.min.js"></script>
-  <script src="../public/assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../public/assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <script src="../public/assets/js/argon-dashboard.min.js?v=2.1.0"></script>
+  <?php include("components/foot.php") ?>
 </body>
 
 </html>

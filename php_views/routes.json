@@ -4,5 +4,8 @@
     },
     "register": {
         "permission_level": 1
+    },
+    "user_cp/dashboard": {
+        "permission_level": 1
     }
 }

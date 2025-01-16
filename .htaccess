@@ -1,6 +1,6 @@
 RewriteEngine On
-RewriteRule ^anime/([0-9]+)$ anime.php?id=$1 [NC,L]
-RewriteRule ^anime/([^/]+)/?$ anime.php?name=$1 [NC,L]
+RedirectMatch 403 ^/php_views/
+RedirectMatch 403 ^/cache/
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php [NC,L]
