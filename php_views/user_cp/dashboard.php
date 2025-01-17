@@ -161,7 +161,7 @@
                                 <h1 class="text-white text-center"><i class="ni ni-app"></i></h1>
                                 <p class="text-white text-center">Vous n'avez aucun services chez nous</p>
                                 <div class="button w-100 d-flex">
-                                    <a href="/user_cp/services" class="btn btn-primary btn-sm mt-2 mx-auto">Ajouter un service</a>
+                                    <a href="/user_cp/add-service" class="btn btn-primary btn-sm mt-2 mx-auto">Ajouter un service</a>
                                 </div>
                             </div>
                         </div>
