@@ -57,8 +57,8 @@
                         <div class="card-body p-3">
                             <label class="form-label">Adresse EMail</label>
                             <div class="form-group">
-                                <input class="form-control disabled" disabled="disabled" type="email" value="ilhann.musi@gmail.com"
-                                    onfocus="focused(this)" onfocusout="defocused(this)">
+                                <input class="form-control disabled" disabled="disabled" type="email"
+                                    value="ilhann.musi@gmail.com" onfocus="focused(this)" onfocusout="defocused(this)">
                             </div>
                             <div class="row mb-2">
                                 <div class="col-6">
@@ -83,12 +83,14 @@
                                 <input class="form-control" type="text" placeholder="Raison du ticket"
                                     onfocus="focused(this)" onfocusout="defocused(this)">
                             </div>
-                            <label class="form-label">Confirm new password</label>
+                            <label class="form-label">Message</label>
                             <div class="form-group">
-                                <input class="form-control" type="password" placeholder="Confirm password"
-                                    onfocus="focused(this)" onfocusout="defocused(this)">
+                                <div id="editor">
+                                    <h2>Demo Content</h2>
+                                    <p>Preset build with <code>snow</code> theme, and some common formats.</p>
+                                </div>
                             </div>
-                            <button class="btn bg-gradient-dark w-100 mb-0">Update password</button>
+                            <button class="btn bg-gradient-dark w-100 mb-0">Ouvrir un ticket</button>
                         </div>
                     </div>
                 </div>
@@ -150,12 +152,16 @@
 
 
             <?php include("php_views/components/footer.php") ?>
-
         </div>
     </main>
 
     <!--   Core JS Files   -->
     <?php include("php_views/components/foot.php") ?>
+            <script>
+                var quill = new Quill('#editor', {
+                  theme: 'snow' // Specify theme in configuration
+                });
+            </script>
 
     <script>
         var win = navigator.platform.indexOf('Win') > -1;
