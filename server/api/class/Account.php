@@ -7,6 +7,8 @@ class Account {
 
     public static function CreateUser(
         $username, 
+        $firstname, 
+        $lastname, 
         $password, 
         $email ){
 
@@ -17,9 +19,11 @@ class Account {
         try {
 		    $GLOBALS['DB']->Insert("users", [
                 "username" => $username,
+                "firstname" => $firstname,
+                "lastname" => $lastname,
                 "email" => $email,
                 "password" => $encrypted_password,
-                "role" => 0,
+                "role" => 2,
                 "ban" => 0,
                 "profile_picture" => "/assets/images/logo.png",
                 "last_login_date" => $date,
@@ -31,7 +35,7 @@ class Account {
         }
     }
 
-    public static function CreatePassword($password){
+    private static function CreatePassword($password){
         
 
         $bcrypt = new Bcrypt();
@@ -41,7 +45,7 @@ class Account {
         return $password_encrypted;
     }
 
-    public static function CheckPassword($password, $user_id){
+    private static function CheckPassword($password, $user_id){
         
         $password_encrypted = Account::GetUser($user_id)['password'];
 
@@ -54,14 +58,12 @@ class Account {
 
     public static function AuthUser(
         $id,
-        $username, 
-        $global_name, 
-        $discord_id,
-        $avatar ){
+        $email,
+        $password){
 
         $date = time();
 
-        try {
+        /*try {
             $GLOBALS['DB']->Update('users', ['discord_id' => $id], [
                 "global_name" => $global_name, 
                 "username" => $username, 
@@ -72,11 +74,11 @@ class Account {
             ]);
         }catch (Exception $e) {
             return "error";
-        }
+        }*/
     }
 
     public static function IsUserExist($id){
-        if ($GLOBALS['DB']->Count("users", ["discord_id" => $id]) != 0)
+        if ($GLOBALS['DB']->Count("users", ["id" => $id]) != 0)
         {
             return true;
         }else{
@@ -85,6 +87,25 @@ class Account {
         
     }
 
+    public static function IsEmailUserExist($email){
+        if ($GLOBALS['DB']->Count("users", ["email" => $email]) != 0)
+        {
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
+
+    public static function IsUsernameUserExist($username){
+        if ($GLOBALS['DB']->Count("users", ["username" => $username]) != 0)
+        {
+            return true;
+        }else{
+            return false;
+        }
+        
+    }
 
 
     public static function GetUser($user_id = null){

@@ -3,6 +3,10 @@ require 'vendor/autoload.php';
 
 include("server/api/class/include.php");
 
+if(isset($_POST['create_account'])){
+  echo "adsa";
+}
+
 $loader = new \Twig\Loader\FilesystemLoader('themes');
 $twig = new \Twig\Environment($loader, [
   'cache' => false,
@@ -69,4 +73,6 @@ $data = [
 ];
 
 echo $twig->render($templatePath, $data);
+
+
  ?>

@@ -64,8 +64,13 @@
                                 <div class="col-6">
                                     <label class="form-label">Catégorie</label>
                                     <select class="form-select" aria-label="Default select example">
-                                        <option value="1" selected>Facturation</option>
-                                        <option value="1">Report Bug</option>
+                                        <?php
+                                        
+                                        foreach(Support::GetTicketsReasons() as $tr){
+                                        
+                                        ?>
+                                        <option value="<?= $tr['id'] ?>" ><?= $tr['reason'] ?></option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                                 <div class="col-6">
@@ -86,8 +91,7 @@
                             <label class="form-label">Message</label>
                             <div class="form-group">
                                 <div id="editor">
-                                    <h2>Demo Content</h2>
-                                    <p>Preset build with <code>snow</code> theme, and some common formats.</p>
+                                    <p>Décrivez votre problème.</p>
                                 </div>
                             </div>
                             <button class="btn bg-gradient-dark w-100 mb-0">Ouvrir un ticket</button>
@@ -96,54 +100,18 @@
                 </div>
                 <div class="col-lg-7 col-md-12 mb-4">
                     <div class="card">
+                        <div class="card-header pb-0 pt-3 bg-transparent">
+                            <h6 class="text-capitalize">Tickets ouvert</h6>
+                            <p class="text-sm mb-0">
+                                <i class="fas fa-ticket"></i>
+                                Retrouvez la liste de vos tickets.
+                            </p>
+                        </div>
                         <div class="card-body p-3">
-                            <div class="d-flex">
-                                <div class="avatar avatar-xl bg-gradient-dark border-radius-md p-2">
-                                    <img src="https://cdn2.steamgriddb.com/icon/374d37146f8e631a2adb03fd6818b497.png"
-                                        alt="slack_logo">
-                                </div>
-                                <div class="ms-3 my-auto">
-                                    <h6>Serveur #89413</h6>
-                                    <div class="avatar-group">
-                                    </div>
-                                </div>
-                                <!--<div class="ms-auto">
-                                    <div class="dropdown">
-                                        <button class="btn btn-link text-secondary ps-0 pe-2"
-                                            id="navbarDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">
-                                            <i class="fa fa-ellipsis-v text-lg"></i>
-                                        </button>
-                                        <div class="dropdown-menu dropdown-menu-end me-sm-n4 me-n3"
-                                            aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="dropdown-item text-white" href="javascript:;">Action</a>
-                                            <a class="dropdown-item text-white" href="javascript:;">Another action</a>
-                                            <a class="dropdown-item text-white" href="javascript:;">Something else here</a>
-                                        </div>
-                                    </div>
-                                </div>-->
-                            </div>
-                            <hr class="horizontal bg-white">
-                            <div class="row">
-                                <div class="col-4">
-                                    <h6 class="text-sm mb-0">Type d'offre</h6>
-                                    <p class="text-secondary text-sm font-weight-bold mb-0">Premium</p>
-                                </div>
-                                <div class="col-4 text-center">
-                                    <h6 class="text-sm mb-0">État</h6>
-                                    <p class="text-success text-sm font-weight-bold mb-0"><i class="fa-solid fa-circle"
-                                            style="color: #2dce89;"></i>&nbsp;Actif</p>
-                                </div>
-                                <div class="col-4 text-end">
-                                    <h6 class="text-sm mb-0">Échéance</h6>
-                                    <p class="text-secondary text-sm font-weight-bold mb-0">16.05.2025</p>
-                                </div>
-                                <div class="btn-group mt-3" role="group" aria-label="Basic example">
-                                    <a href="" type="button" target="_blank" class="btn btn-primary mb-0"><i
-                                            class="fas fa-arrow-up-right-from-square"></i>&nbsp;Panel</a>
-                                    <a href="" type="button" class="btn btn-primary mb-0"><i
-                                            class="fas fa-cog"></i>&nbsp;Gérer</a>
-                                </div>
+
+                            <div class="m-auto h-100">
+                                <h1 class="text-white text-center"><i class="fas fa-ticket"></i></h1>
+                                <p class="text-white text-center">Aucun ticket d'ouvert</p>
                             </div>
                         </div>
                     </div>
@@ -157,11 +125,11 @@
 
     <!--   Core JS Files   -->
     <?php include("php_views/components/foot.php") ?>
-            <script>
-                var quill = new Quill('#editor', {
-                  theme: 'snow' // Specify theme in configuration
-                });
-            </script>
+    <script>
+        var quill = new Quill('#editor', {
+            theme: 'snow' // Specify theme in configuration
+        });
+    </script>
 
     <script>
         var win = navigator.platform.indexOf('Win') > -1;

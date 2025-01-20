@@ -13,6 +13,7 @@
     ],
     "require": {
         "polarising/bcrypt": "^1.0",
-        "twig/twig": "^3.18"
+        "twig/twig": "^3.18",
+        "egulias/email-validator": "^4.0"
     }
 }
