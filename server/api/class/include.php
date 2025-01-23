@@ -21,6 +21,7 @@ include 'Security.php';
 include 'CSRF.php';
 include 'EmailSystem.php';
 include 'Support.php';
+include 'Roles.php';
 if($GLOBALS['csrf_active']){
     CSRF::CreateToken();
 }

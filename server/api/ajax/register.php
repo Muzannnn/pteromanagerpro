@@ -9,14 +9,14 @@ use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\RFCValidation;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = htmlspecialchars($_POST['username']) ?? null;
-    $firstname = htmlspecialchars($_POST['firstname']) ?? null;
-    $lastname = htmlspecialchars($_POST['lastname']) ?? null;
-    $email = htmlspecialchars($_POST['email']) ?? null;
-    $password = $_POST['password'] ?? null;
-    $confirm_password = $_POST['confirm-password'] ?? null;
-
-    if (empty($username) || empty($email) || empty($password)) {
+    if (
+        empty(htmlspecialchars($_POST['username'])) ||
+        empty(htmlspecialchars($_POST['firstname'])) ||
+        empty(htmlspecialchars($_POST['lastname'])) ||
+        empty(htmlspecialchars($_POST['email'])) ||
+        empty(htmlspecialchars($_POST['password'])) ||
+        empty(htmlspecialchars($_POST['confirm_password']))
+    ) {
         header("HTTP/1.1 400");
         echo json_encode([
             'status' => 'error',
@@ -25,6 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    $username = htmlspecialchars($_POST['username']) ?? null;
+    $firstname = htmlspecialchars($_POST['firstname']) ?? null;
+    $lastname = htmlspecialchars($_POST['lastname']) ?? null;
+    $email = htmlspecialchars($_POST['email']) ?? null;
+    $password = $_POST['password'] ?? null;
+    $confirm_password = $_POST['confirm-password'] ?? null;
+
     $success = true;
 
     if ($success) {
@@ -32,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($validator->isValid($email, new RFCValidation())) {
             if (!Account::IsEmailUserExist($email)) {
                 if (!Account::IsUsernameUserExist($username)) {
-                    if($password = $confirm_password){
+                    if ($password = $confirm_password) {
                         Account::CreateUser(
                             $username,
                             $firstname,
@@ -45,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             'status' => 'success'
                         ]);
                         exit;
-                    }else{
+                    } else {
 
                         header("HTTP/1.1 400");
                         echo json_encode([

@@ -12,6 +12,13 @@
 
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
+<?php
+
+if(Account::isAuthentified()){
+  header("Location: /user_cp/dashboard");
+}
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -34,19 +41,21 @@
                   <p class="mb-0">Entrez votre adresse EMail ainsi que votre mot de passe.</p>
                 </div>
                 <div class="card-body">
-                  <form role="form">
+                  <form id="form-login">
                     <div class="mb-3">
-                      <input type="email" class="form-control form-control-lg" placeholder="Email" aria-label="Email">
+                      <input type="email" name="email" class="form-control form-control-lg" placeholder="Email"
+                        aria-label="Email">
                     </div>
                     <div class="mb-3">
-                      <input type="password" class="form-control form-control-lg" placeholder="Mot de passe" aria-label="Mot de passe">
+                      <input type="password" name="password" class="form-control form-control-lg"
+                        placeholder="Mot de passe" aria-label="Mot de passe">
                     </div>
                     <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" id="rememberMe">
                       <label class="form-check-label" for="rememberMe">Se souvenir de moi</label>
                     </div>
                     <div class="text-center">
-                      <button type="button" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Se connecter</button>
+                      <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Se connecter</button>
                     </div>
                   </form>
                 </div>
@@ -61,11 +70,16 @@
                 </div>
               </div>
             </div>
-            <div class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
-              <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden" style="background-image: url('https://www.usinenouvelle.com/mediatheque/2/1/6/000565612_896x598_c.jpg');
+            <div
+              class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
+              <div
+                class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
+                style="background-image: url('<?= GetConfig::GetConfigVar("login_background")['content'] ?>');
           background-size: cover;">
                 <span class="mask bg-gradient-primary opacity-6"></span>
-                <h4 class="mt-5 text-white font-weight-bolder position-relative"><?= GetConfig::GetConfigVar("project_name")['content'] ?></h4>
+                <h4 class="mt-5 text-white font-weight-bolder position-relative">
+                  <?= GetConfig::GetConfigVar("project_name")['content'] ?>
+                </h4>
                 <p class="text-white position-relative"><?= GetConfig::GetConfigVar("slogan")['content'] ?></p>
               </div>
             </div>
@@ -76,6 +90,28 @@
   </main>
   <!--   Core JS Files   -->
   <?php include("components/foot.php") ?>
+  <script>
+    $(document).ready(function () {
+      $('#form-login').on('submit', function (event) {
+        event.preventDefault();
+
+        var formData = new FormData(this);
+        $.ajax({
+          url: '/server/api/ajax/login.php',
+          type: 'POST',
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function (response) {
+            window.location.reload();
+          },
+          error: function (jqXHR) {
+            toastr.error(jqXHR.responseJSON?.message, 'Erreur');
+          }
+        });
+      });
+    });
+  </script>
 </body>
 
 </html>

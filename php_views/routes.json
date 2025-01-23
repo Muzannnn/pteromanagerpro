@@ -1,23 +1,23 @@
 {
     "login": {
-        "permission_level": 1
+        "permission_level": 0
     },
     "register": {
-        "permission_level": 1
+        "permission_level": 0
     },
     "user_cp/dashboard": {
-        "permission_level": 1
+        "permission_level": 2
     },
     "user_cp/my-services": {
-        "permission_level": 1
+        "permission_level": 2
     },
     "user_cp/add-service": {
-        "permission_level": 1
+        "permission_level": 2
     },
     "user_cp/support": {
-        "permission_level": 1
+        "permission_level": 2
     },
     "admin/dashboard": {
-        "permission_level": 1
+        "permission_level": 10
     }
 }

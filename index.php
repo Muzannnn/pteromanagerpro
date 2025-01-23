@@ -3,10 +3,6 @@ require 'vendor/autoload.php';
 
 include("server/api/class/include.php");
 
-if(isset($_POST['create_account'])){
-  echo "adsa";
-}
-
 $loader = new \Twig\Loader\FilesystemLoader('themes');
 $twig = new \Twig\Environment($loader, [
   'cache' => false,
@@ -32,7 +28,12 @@ if (file_exists($phpPagesFile)) {
     $phpPages = json_decode(file_get_contents($phpPagesFile), true);
 }
 
-$userPermissionLevel = 1;
+
+if(Account::isAuthentified()){
+  $userPermissionLevel = Roles::GetRoleByID(Account::GetUser()['role']);
+}else{
+  $userPermissionLevel = 0;
+}
 
 
 if (array_key_exists($requestUri, $phpPages)) {
